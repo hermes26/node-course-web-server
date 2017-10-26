@@ -2,6 +2,7 @@ const express = require('express');
 const hbs = require('hbs');
 const fs = require('fs');
 
+const port = process.env.PORT || 3000;
 var app = express();
 
 app.set('view engine', 'hbs');
@@ -41,9 +42,9 @@ app.use((req, res, next) => {
 });
 
 //maintenance middleware. it is going to stop everythng after it from executing. we don't call next, so the actual handlers are never going to get executed
-app.use((req, res, next) => {
-  res.render('maintenance.hbs')
-});
+// app.use((req, res, next) => {
+//   res.render('maintenance.hbs')
+// });
 
 
 app.use(express.static(__dirname + '/public'));//this is a middleware that serves up a directory
@@ -78,7 +79,7 @@ app.get('/', (req, res) => {
 });
 
 
-app.listen(3000, () => {
-  console.log('Server is up on port 3000');
+app.listen(port, () => {
+  console.log(`Server is up on port ${port}`);
   //now it's clear, to the person who started the app, that the server is ready to go
 });
